@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/Styles/Root/root.css",
+    "inputFile": "wwwroot/Styles/Root/root.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/Subpages/SignInAndRegister.css",
+    "inputFile": "wwwroot/Styles/Subpages/SignInAndRegister.scss"
+  }
+]

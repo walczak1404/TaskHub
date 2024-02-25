@@ -8,6 +8,7 @@ namespace TaskHub.Core.DTO
         public string? Username { get; set; }
 
         [Required(ErrorMessage = "{0} cannot be blank")]
+        [DataType(DataType.Password)]
         public string? Password { get; set; }
     }
 }

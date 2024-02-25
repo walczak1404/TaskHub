@@ -32,6 +32,21 @@ namespace TaskHub.Web.StartupExtensions
             services.AddAuthorization(options =>
             {
                 options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+                options.AddPolicy("NotSignedIn", policy =>
+                {
+                    policy.RequireAssertion(context => !context.User.Identity.IsAuthenticated);
+                });
+
+                options.AddPolicy("SignedIn", policy =>
+                {
+                    policy.RequireAssertion(context => context.User.Identity.IsAuthenticated);
+                });
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/SignIn";
             });
 
             return services;
