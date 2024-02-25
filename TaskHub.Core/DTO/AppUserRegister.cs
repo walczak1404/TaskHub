@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using TaskHub.Core.CustomValidation;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace TaskHub.Core.DTO
 {
-    public class AppUserRegisterDTO
+    public class AppUserRegister
     {
         [Required(ErrorMessage = "{0} cannot be blank")]
         [StringLength(50, ErrorMessage = "{0} cannot be longer than 50 characters")]
@@ -11,6 +13,7 @@ namespace TaskHub.Core.DTO
 
         [Required(ErrorMessage = "{0} cannot be blank")]
         [EmailAddress(ErrorMessage = "{0} must be in valid email format")]
+        //[Remote("test", "test")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "{0} cannot be blank")]
