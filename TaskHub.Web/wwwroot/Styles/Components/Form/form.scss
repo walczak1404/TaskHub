@@ -53,11 +53,6 @@
                 color: white;
             }
         }
-
-        .validation-result {
-            font-size: .6rem;
-            color: $pageSecondaryColor;
-        }
     }
 
     .form-switch-anchor {
@@ -67,5 +62,14 @@
         a {
             color: $textColor;
         }
+    }
+}
+
+.validation-result {
+    font-size: .6rem;
+    color: $pageSecondaryColor;
+
+    ul {
+        list-style-type: none;
     }
 }

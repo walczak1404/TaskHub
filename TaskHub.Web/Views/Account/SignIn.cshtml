@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="~/Styles/Subpages/SignInAndRegister.min.css">
 }
 
-@section ScriptsHead {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" defer></script>
-}
+    @section ScriptsHead {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" defer></script>
+    }
 
-    <div class="form-container">
-        <div class="form-container__logo">
+    <div class="container container--form">
+        <div class="container--form__logo">
             <img src="~/Assets/logo/logo-transparent.png" alt="TaskHub logo">
         </div>
         <form class="form" asp-controller="Account" asp-action="SignIn" asp-route-ReturnUrl="@Context.Request.Query["returnUrl"]">
@@ -35,13 +35,15 @@
                     <input asp-for="Password">
                     <span class="validation-result" asp-validation-for="Password"></span>
                 </div>
-                
+
             </div>
+            <span class="validation-result">@ViewBag.SignInError</span>
             <div class="form__element">
                 <div class="form__element__part form__element__button">
                     <button class="btn">Sign in</button>
                 </div>
             </div>
             <p class="form-switch-anchor">Don't have an account? <a asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Context.Request.Query["returnUrl"]">Register here</a></p>
+            
         </form>
     </div>

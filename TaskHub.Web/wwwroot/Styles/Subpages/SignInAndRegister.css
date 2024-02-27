@@ -1,20 +1,22 @@
-﻿.form-container {
+﻿.container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40vw;
-  min-width: 300px;
-  max-width: 490px;
   background-color: white;
   padding: 5%;
   border-radius: 15px;
 }
-.form-container__logo {
+.container--form {
+  width: 40vw;
+  min-width: 300px;
+  max-width: 490px;
+}
+.container--form__logo {
   width: 100%;
   text-align: center;
 }
-.form-container__logo img {
+.container--form__logo img {
   width: 85%;
 }
 
@@ -64,14 +66,18 @@
   border-radius: 5px;
   color: white;
 }
-.form__element .validation-result {
-  font-size: 0.6rem;
-  color: #ff585f;
-}
 .form .form-switch-anchor {
   margin-top: 20px;
   font-size: 0.6rem;
 }
 .form .form-switch-anchor a {
   color: #1e55b3;
+}
+
+.validation-result {
+  font-size: 0.6rem;
+  color: #ff585f;
+}
+.validation-result ul {
+  list-style-type: none;
 }

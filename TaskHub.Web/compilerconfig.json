@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/Styles/Subpages/SignInAndRegister.css",
     "inputFile": "wwwroot/Styles/Subpages/SignInAndRegister.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/Subpages/list.css",
+    "inputFile": "wwwroot/Styles/Subpages/list.scss"
   }
 ]

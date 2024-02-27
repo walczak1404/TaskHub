@@ -4,9 +4,11 @@ namespace TaskHub.Web.Controllers
 {
     public class AssignmentsController : Controller
     {
-        [Route("/")]
-        public IActionResult List()
+        [Route("/{selectedDate?}")]
+        public IActionResult List(DateTime? selectedDate)
         {
+            ViewBag.SelectedDate = selectedDate != null ? selectedDate.Value.ToString("dd.MM.yyyy") : DateTime.Today.Date.ToString("dd.MM.yyyy");
+
             return View();
         }
     }

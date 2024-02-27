@@ -6,7 +6,6 @@ using TaskHub.Core.DTO;
 
 namespace TaskHub.Web.Controllers
 {
-    [Authorize("NotSignedIn")]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -19,17 +18,21 @@ namespace TaskHub.Web.Controllers
             _signInManager = signInManager;
         }
 
+        [Authorize("NotSignedIn")]
         [HttpGet]
         public IActionResult SignIn()
         {
             return View();
         }
 
+        [Authorize("NotSignedIn")]
         [HttpPost]
         public async Task<IActionResult> SignIn(AppUserSignIn signInModel, string returnUrl)
         {
             if(!ModelState.IsValid)
             {
+                ViewBag.Errors = ModelState.Values.SelectMany(temp => temp.Errors).Select(temp => temp.ErrorMessage);
+
                 return View(signInModel);
             }
 
@@ -46,17 +49,19 @@ namespace TaskHub.Web.Controllers
                 }
             } else
             {
-                ModelState.AddModelError("SignIn", "Invalid username or password");
+                ViewBag.SignInError = "Invalid username or password";
                 return View(signInModel);
             }
         }
 
+        [Authorize("NotSignedIn")]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+        [Authorize("NotSignedIn")]
         [HttpPost]
         public async Task<IActionResult> Register(AppUserRegister registerModel, string returnUrl)
         {
@@ -94,7 +99,7 @@ namespace TaskHub.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("SignIn");
+            return RedirectToAction("SignIn", new { returnUrl = "" });
         }
     }
 }
