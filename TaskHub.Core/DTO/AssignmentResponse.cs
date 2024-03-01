@@ -16,6 +16,9 @@ namespace TaskHub.Core.DTO
 
         public DateTime? Date { get; set; }
 
+        public bool IsDone { get; set; }
+
         public Guid? AuthorID { get; set; }
+
     }
 }

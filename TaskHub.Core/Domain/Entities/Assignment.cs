@@ -15,6 +15,8 @@ namespace TaskHub.Core.Domain.Entities
 
         public DateTime? Date { get; set; }
 
+        public bool IsDone { get; set; }
+
         public Guid? AuthorID { get; set; }
 
         [ForeignKey("AuthorID")]

@@ -1,0 +1,40 @@
+﻿@import "../../Root/Mixins/_flex-mixin";
+
+.tasks {
+    flex-basis: 90%;
+
+    &__header {
+        text-align: center;
+        font-weight: bold;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__main {
+        padding: 4% 10%;
+
+        &__list {
+            list-style: none;
+
+            li {
+                padding-bottom: 30px;
+                @include flex(flex-start, center, row);
+                font-size: .9rem;
+                
+                i {
+                    margin-right: 2%;
+                }
+
+                &.done {
+                    opacity: .5;
+                }
+            }
+        }
+    }
+}

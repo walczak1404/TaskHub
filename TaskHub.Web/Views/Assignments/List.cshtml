@@ -1,37 +1,37 @@
 ﻿@{
     ViewBag.Title = "Assignments";
+
+    ViewBag.ListHeaderUsername = User.Identity!.Name!.EndsWith('s') ? $"{User.Identity.Name}'" : $"{User.Identity.Name}'s";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/Styles/Subpages/list.min.css">
 }
 
-@section ScriptsHead {
+    @section ScriptsHead {
     <script src="~/Scripts/calendar.js" defer></script>
 }
 
-@ViewBag.SelectedDate
-
-<div class="container container--form">
-    <div class="calendar-container">
-          <div class="calendar__header">
-                <p class="current-date"></p>
-                <div class="icons">
-                    <span id="prev" class="material-symbols-rounded"><i class="fa-solid fa-circle-chevron-left"></i></span>
-                    <span id="next" class="material-symbols-rounded"><i class="fa-solid fa-circle-chevron-right"></i></span>
-                </div>
-          </div>
-          <div class="calendar__content">
-                <ul class="weeks">
-                    <li>Mon</li>
-                    <li>Tue</li>
-                    <li>Wed</li>
-                    <li>Thu</li>
-                    <li>Fri</li>
-                    <li>Sat</li>
-                    <li>Sun</li>
+    <div class="container container--wide container--flex">
+        <div class="arrow-container container--flex container--flex--centered">
+            <i class="fa-solid fa-circle-chevron-left list-arrow"></i>
+        </div>
+        <div class="tasks">
+            <header class="tasks__header">
+                <h1>Hello @User.Identity.Name!</h1>
+                <h2>Your tasks for @ViewBag.SelectedDate</h2>
+            </header>
+            <main class="tasks__main">
+                <ul class="tasks__main__list">
+                    <li><i class="fa-regular fa-circle-check"></i><p>To jest pierwsze zadanie</p></li>
+                    <li class="done"><i class="fa-regular fa-circle-check"></i><p>Fusce in feugiat nunc. Fusce laoreet nisl ullamcorper.</p></li>
+                    <li><i class="fa-regular fa-circle-check"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis erat.</p></li>
+                    <li><i class="fa-regular fa-circle-check"></i><p>Krótkie</p></li>
+                    <li><i class="fa-regular fa-circle-check"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum eu tortor eget finibus. Nullam lobortis purus vel urna pulvinar, at laoreet neque consectetur. Donec dignissim</p></li>
                 </ul>
-                <ul class="days" data-selected-date="@ViewBag.SelectedDate"></ul>
-          </div>
+            </main>
+        </div>
+        <div class="arrow-container container--flex container--flex--centered">
+            <i class="fa-solid fa-circle-chevron-right list-arrow"></i>
+        </div>
     </div>
-</div>

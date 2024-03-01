@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskHub.Infrastructure.Context;
 
@@ -11,9 +12,10 @@ using TaskHub.Infrastructure.Context;
 namespace TaskHub.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240229233422_assignmentSeedData")]
+    partial class assignmentSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,9 +143,6 @@ namespace TaskHub.Infrastructure.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
                     b.HasKey("AssignmentID");
 
                     b.HasIndex("AuthorID");
@@ -156,40 +155,35 @@ namespace TaskHub.Infrastructure.Migrations
                             AssignmentID = new Guid("816a16c7-ef5e-49e1-bef7-db781ea3f192"),
                             AuthorID = new Guid("b34fd626-5019-4cee-06cb-08dc36578af7"),
                             Content = "Task Number 1",
-                            Date = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDone = false
+                            Date = new DateTime(2024, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             AssignmentID = new Guid("816a26c7-ef5e-49e2-bef7-db781ea3f292"),
                             AuthorID = new Guid("b34fd626-5019-4cee-06cb-08dc36578af7"),
                             Content = "Task Number 2",
-                            Date = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDone = false
+                            Date = new DateTime(2024, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             AssignmentID = new Guid("816a36c7-ef5e-49e3-bef7-db781ea3f392"),
                             AuthorID = new Guid("b34fd626-5019-4cee-06cb-08dc36578af7"),
                             Content = "Task Number 3",
-                            Date = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDone = false
+                            Date = new DateTime(2024, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             AssignmentID = new Guid("816a46c7-ef5e-49e4-bef7-db781ea3f492"),
                             AuthorID = new Guid("b34fd626-5019-4cee-06cb-08dc36578af7"),
                             Content = "Task Number 4",
-                            Date = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDone = false
+                            Date = new DateTime(2024, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             AssignmentID = new Guid("816a56c7-ef5e-49e5-bef7-db781ea3f592"),
                             AuthorID = new Guid("b34fd626-5019-4cee-06cb-08dc36578af7"),
                             Content = "Task Number 5",
-                            Date = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDone = false
+                            Date = new DateTime(2024, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
