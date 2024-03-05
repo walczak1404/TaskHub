@@ -12,6 +12,12 @@ html {
 body {
   background: rgb(255, 88, 95);
   background: radial-gradient(circle, #ff797f 50%, #ff9a9f 100%);
+  height: fit-content;
   min-height: 100vh;
   color: #1e55b3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

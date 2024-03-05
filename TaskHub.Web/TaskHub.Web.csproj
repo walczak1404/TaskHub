@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BuildWebCompiler2022" Version="1.14.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.27">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

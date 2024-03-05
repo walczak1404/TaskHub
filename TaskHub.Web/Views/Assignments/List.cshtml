@@ -8,30 +8,38 @@
     <link rel="stylesheet" href="~/Styles/Subpages/list.min.css">
 }
 
-    @section ScriptsHead {
+@section ScriptsHead {
     <script src="~/Scripts/calendar.js" defer></script>
+    <script src="~/Scripts/tasksHeader.js" defer></script>
 }
 
-    <div class="container container--wide container--flex">
-        <div class="arrow-container container--flex container--flex--centered">
-            <i class="fa-solid fa-circle-chevron-left list-arrow"></i>
+<div class="container container--wide tasks-container">
+    <header class="tasks-header">
+        <div class="tasks-header__part tasks-header__part--logo">
+            <div class="tasks-header__logo">
+                <img src="" alt="TaskHub logo">
+            </div>
         </div>
-        <div class="tasks">
-            <header class="tasks__header">
-                <h1>Hello @User.Identity.Name!</h1>
-                <h2>Your tasks for @ViewBag.SelectedDate</h2>
-            </header>
-            <main class="tasks__main">
-                <ul class="tasks__main__list">
-                    <li><i class="fa-regular fa-circle-check"></i><p>To jest pierwsze zadanie</p></li>
-                    <li class="done"><i class="fa-regular fa-circle-check"></i><p>Fusce in feugiat nunc. Fusce laoreet nisl ullamcorper.</p></li>
-                    <li><i class="fa-regular fa-circle-check"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis erat.</p></li>
-                    <li><i class="fa-regular fa-circle-check"></i><p>Krótkie</p></li>
-                    <li><i class="fa-regular fa-circle-check"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum eu tortor eget finibus. Nullam lobortis purus vel urna pulvinar, at laoreet neque consectetur. Donec dignissim</p></li>
-                </ul>
-            </main>
+        <div class="tasks-header__part tasks-header__part--date">
+            <div class="tasks-header__date">
+                <p class="tasks-header__date__calendar-icon">
+                    <i class="fa-regular fa-calendar"></i>
+                </p>
+                <p class="tasks-header__date__date-content">
+                    @ViewBag.SelectedDate
+                </p>
+                <p class="tasks-header__date__arrow">
+                    <i class="fa-solid fa-caret-down"></i>
+                </p>
+            </div>
         </div>
-        <div class="arrow-container container--flex container--flex--centered">
-            <i class="fa-solid fa-circle-chevron-right list-arrow"></i>
+        <div class="tasks-header__part tasks-header__part--logout">
+            <div class="tasks-header__logout">
+                <a asp-controller="Account" asp-action="Logout">
+                    <p class="tasks-header__logout__text"></p>
+                    <p class="tasks-header__logout__icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></p>
+                </a>
+            </div>
         </div>
-    </div>
+    </header>
+</div>

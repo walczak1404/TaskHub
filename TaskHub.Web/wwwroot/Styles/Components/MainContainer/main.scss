@@ -5,12 +5,14 @@
     transform: translate(-50%, -50%);
     background-color: white;
     border-radius: 15px;
+    max-height: 95vh;
 
     &--narrow {
         padding: 5%;
-        width: 40vw;
+        width: 45vw;
         min-width: 300px;
         max-width: 490px;
+        overflow-y: auto;
 
         &__logo {
             width: 100%;
@@ -20,12 +22,21 @@
                 width: 85%;
             }
         }
+
+        @media(max-height: 450px) {
+            padding: 1%;
+
+            &__logo {
+                img {
+                    width: 60%;
+                }
+            }
+        }
     }
 
     &--wide {
-        width: 60vw;
+        width: 80vw;
+        height: 90vh;
         min-width: 300px;
-        max-width: 700px;
-        padding: 2%;
     }
 }

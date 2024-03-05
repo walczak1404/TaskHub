@@ -14,7 +14,7 @@
     }
 
     <div class="container container--narrow">
-        <div class="container--form__logo">
+        <div class="container--narrow__logo">
             <img src="~/Assets/logo/logo-transparent.png" alt="TaskHub logo">
         </div>
         <form class="form" asp-controller="Account" asp-action="SignIn" asp-route-ReturnUrl="@Context.Request.Query["returnUrl"]">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="form__element__part form__element__input">
                     <input asp-for="Username">
-                    <span class="validation-result" asp-validation-for="Username"></span>
+                    <span class="form__validation-result" asp-validation-for="Username"></span>
                 </div>
             </div>
             <div class="form__element">
@@ -33,17 +33,17 @@
                 </div>
                 <div class="form__element__part form__element__input">
                     <input asp-for="Password">
-                    <span class="validation-result" asp-validation-for="Password"></span>
+                    <span class="form__validation-result" asp-validation-for="Password"></span>
                 </div>
 
             </div>
-            <span class="validation-result">@ViewBag.SignInError</span>
+            <span class="form__validation-result">@ViewBag.SignInError</span>
             <div class="form__element">
                 <div class="form__element__part form__element__button">
                     <button class="btn">Sign in</button>
                 </div>
             </div>
-            <p class="form-switch-anchor">Don't have an account? <a asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Context.Request.Query["returnUrl"]">Register here</a></p>
+            <p class="form__switch-anchor">Don't have an account? <a asp-controller="Account" asp-action="Register" asp-route-ReturnUrl="@Context.Request.Query["returnUrl"]">Register here</a></p>
             
         </form>
     </div>
