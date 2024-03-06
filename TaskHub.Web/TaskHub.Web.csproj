@@ -28,4 +28,8 @@
     <ProjectReference Include="..\TaskHub.Infrastructure\TaskHub.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Styles\Components\Backdrop\" />
+  </ItemGroup>
+
 </Project>

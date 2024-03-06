@@ -37,6 +37,10 @@
                 &:focus {
                     transform: scale(1.03);
                 }
+
+                &.input--edit {
+                    font-size: .8em;
+                }
             }
         }
 
@@ -54,6 +58,10 @@
                 }
 
                 color: white;
+
+                &--edit {
+                    width: 25%;
+                }
             }
         }
     }

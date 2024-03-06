@@ -2,84 +2,98 @@
 
 $width-breakpoint: 200px;
 
-.tasks-container {
-    .tasks-header {
-        @include flex(flex-start, center, row);
-        margin: auto;
-        margin-top: 10px;
-        height: 40px;
+
+.tasks-header {
+    @include flex(flex-start, center, row);
+    margin: auto;
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+    max-width: 1200px;
+    //background-color: red;
+    position: relative;
+
+    font: {
+        size: .9em;
+        weight: bold;
+    }
+
+    @media(min-width: 900px) {
+        height: 70px;
+        font-size: 1em;
+    }
+
+    &__part {
+        flex-basis: 50%;
+        height: 100%;
+        @include flex(center, center);
+        font-size: .9em;
+        user-select: none;
+
+        &--logo {
+            @include flex(flex-start, center, row);
+            //background-color: red;
+        }
+
+        &--date {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &--logout {
+            @include flex(flex-end, center, row);
+        }
+    }
+
+    &__logo {
         width: 100%;
-        max-width: 1200px;
-        //background-color: red;
+        height: 100%;
+        //background-color: green;
+        margin-left: 10px;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &__date {
+        @include flex(center, center, row);
         position: relative;
 
-        font: {
-            size: .9em;
-            weight: bold;
+        &__calendar-icon {
+            margin-right: 5px;
         }
 
-        @media(min-width: 900px) {
-            height: 70px;
-            font-size: 1em;
+        &__arrow {
+            margin-left: 5px;
         }
 
-        &__part {
-            flex-basis: 50%;
-            height: 100%;
-            @include flex(center, center);
-            font-size: .9em;
-            user-select: none;
+        &__calendar {
+            position: fixed;
+            top: 75%;
+            left: 50%;
+            width: 300px;
+            transform: translateX(-50%) scaleY(0);
+            transform-origin: top center;
+            transition: .3s;
 
-            &--logo {
-                @include flex(flex-start, center, row);
-                //background-color: red;
-            }
-
-            &--date {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            &--logout {
-                @include flex(flex-end, center, row);
+            &--active {
+                transform: translateX(-50%) scaleY(1);
             }
         }
+    }
 
-        &__logo {
-            width: 100%;
-            height: 100%;
-            //background-color: green;
-            margin-left: 10px;
+    &__logout {
+        margin-right: 10px;
 
-            img {
-                height: 100%;
-            }
-        }
-
-        &__date {
+        a {
             @include flex(center, center, row);
-
-            &__calendar-icon {
-                margin-right: 5px;
-            }
-
-            &__arrow {
-                margin-left: 5px;
-            }
         }
 
-        &__logout {
-            margin-right: 10px;
-
-            a {
-                @include flex(center, center, row);
-            }
-
-            &__icon {
-                margin-left: 5px;
-            }
+        &__icon {
+            margin-left: 5px;
         }
     }
 }

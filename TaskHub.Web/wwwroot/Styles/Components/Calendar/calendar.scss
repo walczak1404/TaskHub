@@ -2,10 +2,9 @@
 @import "../../Root/Mixins/_flex-mixin";
 
 .calendar-container {
-    width: 90%;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 0 10px 0 #333;
 
     .calendar__header {
         @include flex(space-between, center, row);
@@ -94,7 +93,7 @@
                     color: #fff;
 
                     &::before {
-                        background: #9B59B6;
+                        background: $pageSecondaryColor;
                     }
                 }
 

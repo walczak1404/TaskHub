@@ -1,7 +1,23 @@
-﻿@{
+﻿@model AssignmentResponse
+@{
     ViewBag.Title = "Assignments";
 
-    ViewBag.ListHeaderUsername = User.Identity!.Name!.EndsWith('s') ? $"{User.Identity.Name}'" : $"{User.Identity.Name}'s";
+    // ViewBag.ListHeaderUsername = User.Identity!.Name!.EndsWith('s') ? $"{User.Identity.Name}'" : $"{User.Identity.Name}'s";
+
+    DateTime selectedDate = DateTime.Parse(ViewBag.SelectedDate);
+    string dayBefore = selectedDate.AddDays(-1).ToString("yyyy-MM-dd");
+    string dayAfter = selectedDate.AddDays(1).ToString("yyyy-MM-dd");
+
+    ViewBag.CalendarClass = "tasks-header__date__calendar";
+
+    List<string> tasks = new List<string>()
+    {
+        "Lorem ipsum dolor sit inn",
+        "Lorem liberoo",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae nona",
+        "Lorem leon",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum lorem eu porta bibendum velite"
+    };
 }
 
 @section Styles {
@@ -11,6 +27,7 @@
 @section ScriptsHead {
     <script src="~/Scripts/calendar.js" defer></script>
     <script src="~/Scripts/tasksHeader.js" defer></script>
+    <script src="~/Scripts/taskEdit.js" defer></script>
 }
 
 <div class="container container--wide tasks-container">
@@ -31,6 +48,7 @@
                 <p class="tasks-header__date__arrow">
                     <i class="fa-solid fa-caret-down"></i>
                 </p>
+                @await Html.PartialAsync("_CalendarPartial")
             </div>
         </div>
         <div class="tasks-header__part tasks-header__part--logout">
@@ -42,4 +60,60 @@
             </div>
         </div>
     </header>
+    <main class="tasks-main">
+        <div class="tasks-main__welcome">
+            <h2>Have a great day @(User.Identity.Name)!</h2>
+            <h1>Your tasks</h1>
+        </div>
+        <div class="tasks-main__list-container">
+            <ul class="tasks-main__list">
+                @foreach (string task in tasks)
+                {
+                    <li class="tasks-main__list__single-task">
+                        <p class="tasks-main__list__single-task__icon">
+                            <i class="fa-regular fa-circle"></i>
+                            <i class="fa-regular fa-circle-check"></i>
+                        </p>
+                        <p class="tasks-main__list__single-task__content">
+                            @task
+                        </p>
+                        <p class="tasks-main__list__single-task__edit">
+                            <i class="fa-solid fa-pen" data-taskID="123123"></i>
+                        </p>
+                    </li>
+                }
+            </ul>
+            <p class="tasks-main__add-task">
+                + Add new task
+            </p>
+        </div>
+        <div class="tasks-main__arrow tasks-main__arrow--left">
+            <a asp-controller="Assignments" asp-action="List" asp-route-selectedDate="@dayBefore"><i class="fa-solid fa-circle-chevron-left"></i></a>
+        </div>
+        <div class="tasks-main__arrow tasks-main__arrow--right">
+            <a asp-controller="Assignments" asp-action="List" asp-route-selectedDate="@dayAfter"><i class="fa-solid fa-circle-chevron-right"></i></a>
+        </div>
+    </main>
+</div>
+<div class="backdrop" id="backdrop">
+    <div class="container container--narrow">
+        <form class="form" asp-controller="Assignments" asp-action="Edit">
+            <div class="form__element">
+                <input asp-for="AssignmentID" type="hidden">
+                <div class="form__element__part form__element__label">
+                    <label asp-for="Content">Edit task</label>
+                </div>
+                <div class="form__element__part form__element__input">
+                    <input asp-for="Content" class="input--edit" spellcheck="false">
+                    <span class="form__validation-result" asp-validation-for="Content"></span>
+                </div>
+            </div>
+            <div class="form__element">
+                <div class="form__element__part form__element__button">
+                    <button type="submit "class="btn btn--edit">Edit</button>
+                    <button type="button" class="btn btn--edit">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

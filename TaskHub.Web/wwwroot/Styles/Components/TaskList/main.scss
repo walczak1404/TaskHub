@@ -1,0 +1,142 @@
+﻿@import "../../Root/Mixins/_flex-mixin";
+@import "../../Root/_globalVariables";
+
+.tasks-main {
+    //background-color: red;
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    position: relative;
+
+    &__welcome {
+        margin: {
+            top: 4%;
+            bottom: 3%;
+        }
+
+        width: 100%;
+        text-align: center;
+
+        h1 {
+            font-size: .9em;
+        }
+
+        h2 {
+            font-size: 1em;
+        }
+
+        @media(min-width: 900px) {
+            margin: {
+                top: 2%;
+            }
+
+            h1 {
+                font-size: 1.1em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    &__list-container {
+        font-size: .83em;
+        width: 100%;
+        @include flex(flex-start, center);
+
+        > * {
+            width: 90%;
+            max-width: 750px;
+        }
+
+        @media(min-width: 900px) {
+            font-size: .9em;
+        }
+    }
+
+    &__list {
+        list-style-type: none;
+
+        &__single-task {
+            @include flex(flex-start, stretch, row);
+            margin-bottom: 7%;
+
+            &__icon {
+                @include flex(center, center);
+                margin-right: 2%;
+
+                .fa-circle-check {
+                    display: none;
+                }
+            }
+
+            &__content {
+                position: relative;
+            }
+
+            &__edit {
+                flex-grow: 1;
+                @include flex(center);
+                color: #e1e401;
+                transform: scale(0);
+                padding-left: 2%;
+                cursor: pointer;
+
+                .fa-pen.fa-pen--hidden {
+                    display: none;
+                }
+            }
+
+            &:hover {
+                .tasks-main__list__single-task__edit {
+                    transform: scale(1);
+                }
+            }
+
+            &--done {
+                opacity: .5;
+
+                .fa-circle {
+                    display: none;
+
+                    &-check {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+
+    &__arrow {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%) scale(0);
+        font-size: 1.3em;
+
+        &--left {
+            left: 2%;
+        }
+
+        &--right {
+            right: 2%;
+        }
+
+        @media(min-width: 1075px) {
+            transform: translateY(-50%);
+        }
+
+        @media(min-width: 1400px) {
+            font-size: 1.8em;
+
+            &--left {
+                left: 8%;
+            }
+
+            &--right {
+                right: 8%;
+            }
+        }
+    }
+}

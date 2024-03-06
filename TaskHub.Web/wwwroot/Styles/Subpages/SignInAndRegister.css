@@ -6,6 +6,7 @@
   background-color: white;
   border-radius: 15px;
   max-height: 95vh;
+  overflow: hidden;
 }
 .container--narrow {
   padding: 5%;
@@ -70,6 +71,9 @@
 .form__element__part input:focus {
   transform: scale(1.03);
 }
+.form__element__part input.input--edit {
+  font-size: 0.8em;
+}
 .form__element__button {
   text-align: center;
 }
@@ -80,6 +84,9 @@
   height: 30px;
   border-radius: 5px;
   color: white;
+}
+.form__element__button .btn--edit {
+  width: 25%;
 }
 .form__switch-anchor {
   margin-top: 20px;

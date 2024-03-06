@@ -1,0 +1,5 @@
+﻿@import "../../Root/Mixins/_flex-mixin";
+
+.tasks-container {
+    @include flex();
+}
