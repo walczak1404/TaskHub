@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TaskHub.Core.CustomValidation;
+using TaskHub.Core.Domain.Entities;
 
 namespace TaskHub.Core.DTO
 {
@@ -11,10 +12,19 @@ namespace TaskHub.Core.DTO
 
         [Required]
         [DataType(DataType.Date)]
-        [DateBetweenTodayAndTwoYearsUp(ErrorMessage = "Task date should be between today and two years from now")]
         public DateTime? Date { get; set; }
 
         [Required(ErrorMessage = "Author ID cannot be blank")]
         public Guid? AuthorID { get; set; }
+
+        public Assignment ToAssignment()
+        {
+            return new Assignment()
+            {
+                Content = Content,
+                Date = Date,
+                AuthorID = AuthorID
+            };
+        }
     }
 }

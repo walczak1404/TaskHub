@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskHub.Core.CustomValidation;
+﻿using TaskHub.Core.Domain.Entities;
 
 namespace TaskHub.Core.DTO
 {
@@ -19,6 +13,20 @@ namespace TaskHub.Core.DTO
         public bool IsDone { get; set; }
 
         public Guid? AuthorID { get; set; }
+    }
 
+    public static class AssignmentExtensions
+    {
+        public static AssignmentResponse ToAssignmentResponse(this Assignment assignment)
+        {
+            return new AssignmentResponse()
+            {
+                AssignmentID = assignment.AssignmentID,
+                Content = assignment.Content,
+                Date = assignment.Date,
+                IsDone = assignment.IsDone,
+                AuthorID = assignment.AuthorID
+            };
+        }
     }
 }

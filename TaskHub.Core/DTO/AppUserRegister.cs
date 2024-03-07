@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using TaskHub.Core.CustomValidation;
 using TaskHub.Core.Domain.Entities.Identity;
-using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace TaskHub.Core.DTO
 {
