@@ -1,0 +1,12 @@
+﻿@model AssignmentAddRequest
+
+<form id="add-task-form" class="form tasks-main__add-task__form" asp-controller="Assignments" asp-action="AddTask" asp-route-selectedDate="@ViewBag.SelectedDateLink">
+    <input asp-for="Date" value="@ViewBag.SelectedDateLink" type="hidden">
+    <input asp-for="AuthorID" value="@ViewBag.UserID" type="hidden">
+    <div class="form__element">
+        <div class="form__element__part form__element__input">
+            <input asp-for="Content"><button><i class="fa-solid fa-plus"></i></button>
+            <span class="form__validation-result" asp-validation-for="Content"></span>
+        </div>
+    </div>
+</form>

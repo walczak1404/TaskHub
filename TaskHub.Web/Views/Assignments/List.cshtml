@@ -19,6 +19,7 @@
     <script src="~/Scripts/calendar.js" defer></script>
     <script src="~/Scripts/tasksHeader.js" defer></script>
     <script src="~/Scripts/taskEdit.js" defer></script>
+    <script src="~/Scripts/taskAdd.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" defer></script>
@@ -85,9 +86,10 @@
                     </li>
                 }
             </ul>
-            <p class="tasks-main__add-task">
-                + Add new task
-            </p>
+            <div class="tasks-main__add-task">
+                <button class="tasks-main__add-task__btn" id="add-task-btn">+ Add new task</button>
+                @await Html.PartialAsync("_AddTaskPartial", Model.AddRequest)
+            </div>
         </div>
         <div class="tasks-main__arrow tasks-main__arrow--left">
             <a asp-controller="Assignments" asp-action="List" asp-route-selectedDate="@dayBefore"><i class="fa-solid fa-circle-chevron-left"></i></a>

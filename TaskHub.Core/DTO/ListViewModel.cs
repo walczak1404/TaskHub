@@ -10,5 +10,7 @@ namespace TaskHub.Core.DTO
     {
         public List<AssignmentResponse> Assignments { get; set; }
         public AssignmentUpdateRequest? UpdateRequest { get; set; }
+
+        public AssignmentAddRequest? AddRequest { get; set; }
     }
 }

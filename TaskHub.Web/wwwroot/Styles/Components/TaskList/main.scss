@@ -70,8 +70,10 @@
             }
 
             &__content {
-                width: fit-content;
+                //min-width: 150px;
+                flex-basis: auto;
                 flex-grow: 0;
+                flex-shrink: 1;
             }
 
             &__edit {
@@ -115,7 +117,68 @@
     }
 
     &__add-task {
-        display: flex;
+        position: relative;
+        width: 80%;
+        min-width: 300px;
+
+        &__btn {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: .3s;
+            transform: translateX(-50%);
+
+            &:hover {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+
+        &__form {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+
+            &--active {
+                transform: translateX(-50%);
+            }
+
+            .form__element {
+                padding: 0;
+                margin: 0;
+
+                &__input {
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+
+                    input:focus {
+                        transform: none;
+                    }
+
+                    button {
+                        position: absolute;
+                        right: 1px;
+                        top: 0;
+                        height: 100%;
+                        width: 8%;
+                        min-width: 23px;
+                        background-color: $pageSecondaryColor;
+                        border: none;
+                        cursor: pointer;
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        color: white;
+                    }
+                }
+            }
+        }
     }
 
     &__arrow {

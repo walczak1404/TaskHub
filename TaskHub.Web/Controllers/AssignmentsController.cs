@@ -9,12 +9,14 @@ namespace TaskHub.Web.Controllers
     public class AssignmentsController : Controller
     {
         private readonly IAssignmentGetterService _assignmentGetterService;
+        private readonly IAssignmentAdderService _assignmentAdderService;
         private readonly IAssignmentUpdaterService _assignmentUpdaterService;
         private readonly IAssignmentDeleterService _assignmentDeleterService;
 
-        public AssignmentsController(IAssignmentGetterService assignmentGetterService, IAssignmentUpdaterService assignmentUpdaterService, IAssignmentDeleterService assignmentDeleterService)
+        public AssignmentsController(IAssignmentGetterService assignmentGetterService, IAssignmentAdderService assignmentAdderService, IAssignmentUpdaterService assignmentUpdaterService, IAssignmentDeleterService assignmentDeleterService)
         {
             _assignmentGetterService = assignmentGetterService;
+            _assignmentAdderService = assignmentAdderService;
             _assignmentUpdaterService = assignmentUpdaterService;
             _assignmentDeleterService = assignmentDeleterService;
         }
@@ -28,6 +30,7 @@ namespace TaskHub.Web.Controllers
             ViewBag.SelectedDateLink = date.ToString("yyyy-MM-dd");
 
             Guid userID = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            ViewBag.UserID = userID;
 
             List<AssignmentResponse> assignments = await _assignmentGetterService.GetAssignmentsForDay(date, userID);
 
@@ -87,6 +90,23 @@ namespace TaskHub.Web.Controllers
         public async Task<IActionResult> ChangeAssignmentStatus(Guid assignmentID, DateTime? selectedDate)
         {
             await _assignmentUpdaterService.ChangeStatus(assignmentID);
+
+            return RedirectToAction("List", new { selectedDate = selectedDate?.ToString("yyyy-MM-dd") });
+        }
+
+        [HttpPost]
+        [Route("/add-task")]
+        public async Task<IActionResult> AddTask(AssignmentAddRequest assignmentAddRequest, DateTime? selectedDate)
+        {
+            Guid userID = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            assignmentAddRequest.AuthorID = userID;
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("List", new { selectedDate = selectedDate?.ToString("yyyy-MM-dd") });
+            }
+
+            await _assignmentAdderService.AddAssignment(assignmentAddRequest);
 
             return RedirectToAction("List", new { selectedDate = selectedDate?.ToString("yyyy-MM-dd") });
         }
