@@ -27,7 +27,7 @@ namespace TaskHub.Web.Controllers
 
         [Authorize("NotSignedIn")]
         [HttpPost]
-        public async Task<IActionResult> SignIn(AppUserSignIn signInModel, string returnUrl)
+        public async Task<IActionResult> SignIn(AppUserSignIn signInModel, string? returnUrl)
         {
             if(!ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace TaskHub.Web.Controllers
 
         [Authorize("NotSignedIn")]
         [HttpPost]
-        public async Task<IActionResult> Register(AppUserRegister registerModel, string returnUrl)
+        public async Task<IActionResult> Register(AppUserRegister registerModel, string? returnUrl)
         {
             if(!ModelState.IsValid)
             {
