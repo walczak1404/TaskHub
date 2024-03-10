@@ -1,4 +1,4 @@
-﻿@model AssignmentResponse
+﻿@model ListViewModel
 @{
     ViewBag.Title = "Assignments";
 
@@ -9,15 +9,6 @@
     string dayAfter = selectedDate.AddDays(1).ToString("yyyy-MM-dd");
 
     ViewBag.CalendarClass = "tasks-header__date__calendar";
-
-    List<string> tasks = new List<string>()
-    {
-        "Lorem ipsum dolor sit inn",
-        "Lorem liberoo",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae nona",
-        "Lorem leon",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce rutrum lorem eu porta bibendum velite"
-    };
 }
 
 @section Styles {
@@ -28,6 +19,9 @@
     <script src="~/Scripts/calendar.js" defer></script>
     <script src="~/Scripts/tasksHeader.js" defer></script>
     <script src="~/Scripts/taskEdit.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" defer></script>
 }
 
 <div class="container container--wide tasks-container">
@@ -66,19 +60,27 @@
             <h1>Your tasks</h1>
         </div>
         <div class="tasks-main__list-container">
-            <ul class="tasks-main__list">
-                @foreach (string task in tasks)
+            <ul class="tasks-main__list" id="task-list">
+                @foreach (AssignmentResponse assignment in Model.Assignments)
                 {
-                    <li class="tasks-main__list__single-task">
+                    <li class="tasks-main__list__single-task @(assignment.IsDone ? "tasks-main__list__single-task--done" : "")">
                         <p class="tasks-main__list__single-task__icon">
-                            <i class="fa-regular fa-circle"></i>
-                            <i class="fa-regular fa-circle-check"></i>
+                            <a asp-controller="Assignments" asp-action="ChangeAssignmentStatus" asp-route-assignmentID="@assignment.AssignmentID" asp-route-SelectedDate="@ViewBag.SelectedDateLink">
+                                @if(!assignment.IsDone)
+                                {
+                                    <i class="fa-regular fa-circle"></i>
+                                } else
+                                {
+                                    <i class="fa-regular fa-circle-check"></i>
+                                }
+                            </a>
                         </p>
                         <p class="tasks-main__list__single-task__content">
-                            @task
+                            @assignment.Content
                         </p>
                         <p class="tasks-main__list__single-task__edit">
-                            <i class="fa-solid fa-pen" data-taskID="123123"></i>
+                            <i class="fa-solid fa-pen" data-taskID="@assignment.AssignmentID" data-taskContent="@assignment.Content"></i>
+                            <a asp-controller="Assignments" asp-action="DeleteAssignment" asp-route-assignmentID="@assignment.AssignmentID" asp-route-SelectedDate="@ViewBag.SelectedDateLink"><i class="fa-solid fa-trash"></i></a>
                         </p>
                     </li>
                 }
@@ -95,25 +97,4 @@
         </div>
     </main>
 </div>
-<div class="backdrop" id="backdrop">
-    <div class="container container--narrow">
-        <form class="form" asp-controller="Assignments" asp-action="Edit">
-            <div class="form__element">
-                <input asp-for="AssignmentID" type="hidden">
-                <div class="form__element__part form__element__label">
-                    <label asp-for="Content">Edit task</label>
-                </div>
-                <div class="form__element__part form__element__input">
-                    <input asp-for="Content" class="input--edit" spellcheck="false">
-                    <span class="form__validation-result" asp-validation-for="Content"></span>
-                </div>
-            </div>
-            <div class="form__element">
-                <div class="form__element__part form__element__button">
-                    <button type="submit "class="btn btn--edit">Edit</button>
-                    <button type="button" class="btn btn--edit">Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+@await Html.PartialAsync("_EditModalPartial", Model.UpdateRequest)

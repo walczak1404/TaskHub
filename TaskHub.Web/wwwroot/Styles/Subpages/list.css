@@ -162,6 +162,7 @@
   width: 100%;
   max-width: 1200px;
   position: relative;
+  z-index: 1;
   font-size: 0.9em;
   font-weight: bold;
 }
@@ -229,7 +230,7 @@
   margin-left: 5px;
 }
 .tasks-header__date__calendar {
-  position: fixed;
+  position: absolute;
   top: 75%;
   left: 50%;
   width: 300px;
@@ -287,17 +288,15 @@
 }
 .tasks-main__list-container {
   font-size: 0.83em;
-  width: 100%;
+  width: 90%;
+  margin: auto;
+  max-width: 750px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   align-content: normal;
   flex-wrap: nowrap;
-}
-.tasks-main__list-container > * {
-  width: 90%;
-  max-width: 750px;
 }
 @media (min-width: 900px) {
   .tasks-main__list-container {
@@ -306,49 +305,49 @@
 }
 .tasks-main__list {
   list-style-type: none;
+  margin: auto;
 }
 .tasks-main__list__single-task {
   display: flex;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: center;
   flex-direction: row;
   align-content: normal;
   flex-wrap: nowrap;
   margin-bottom: 7%;
 }
 .tasks-main__list__single-task__icon {
-  display: flex;
+  margin-right: 2%;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  align-content: normal;
-  flex-wrap: nowrap;
-  margin-right: 2%;
-}
-.tasks-main__list__single-task__icon .fa-circle-check {
-  display: none;
 }
 .tasks-main__list__single-task__content {
-  position: relative;
+  width: fit-content;
+  flex-grow: 0;
 }
 .tasks-main__list__single-task__edit {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
   align-content: normal;
   flex-wrap: nowrap;
-  color: #e1e401;
-  transform: scale(0);
-  padding-left: 2%;
+  color: #ff585f;
+  transform: scaleY(0);
+  padding-left: 5%;
+}
+.tasks-main__list__single-task__edit > * {
   cursor: pointer;
 }
-.tasks-main__list__single-task__edit .fa-pen.fa-pen--hidden {
-  display: none;
+.tasks-main__list__single-task__edit .fa-pen {
+  color: #dcdd0c;
+}
+.tasks-main__list__single-task__edit .fa-trash {
+  margin-left: 15px;
 }
 .tasks-main__list__single-task:hover .tasks-main__list__single-task__edit {
-  transform: scale(1);
+  transform: scaleY(1);
 }
 .tasks-main__list__single-task--done {
   opacity: 0.5;
@@ -358,6 +357,9 @@
 }
 .tasks-main__list__single-task--done .fa-circle-check {
   display: inline;
+}
+.tasks-main__add-task {
+  display: flex;
 }
 .tasks-main__arrow {
   position: fixed;
@@ -445,6 +447,7 @@
   border: none;
   width: 40%;
   height: 30px;
+  cursor: pointer;
   border-radius: 5px;
   color: white;
 }

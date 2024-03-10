@@ -14,5 +14,12 @@ namespace TaskHub.Core.ServiceContracts
         /// <param name="authorID">ID of the author of assignments</param>
         /// <returns>List of Assignments</returns>
         Task<List<AssignmentResponse>> GetAssignmentsForDay(DateTime? day, Guid? authorID);
+
+        /// <summary>
+        /// Retrieves assignment with given ID from database
+        /// </summary>
+        /// <param name="assignmentID">ID of searched assignment</param>
+        /// <returns>Retrieved assignment</returns>
+        Task<AssignmentResponse> GetAssignmentByID(Guid? assignmentID);
     }
 }

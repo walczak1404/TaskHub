@@ -3,6 +3,7 @@ using TaskHub.Core.CustomValidation;
 
 namespace TaskHub.Core.DTO
 {
+    [Serializable]
     public class AssignmentUpdateRequest
     {
         [Required(ErrorMessage = "Task ID cannot be blank")]

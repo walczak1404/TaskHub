@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TaskHub.Core.Domain.Entities.Identity;
+using TaskHub.Core.ServiceContracts;
+using TaskHub.Core.Services;
 using TaskHub.Infrastructure.Context;
 
 namespace TaskHub.Web.StartupExtensions
@@ -12,6 +14,11 @@ namespace TaskHub.Web.StartupExtensions
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IAssignmentAdderService, AssignmentAdderService>();
+            services.AddScoped<IAssignmentGetterService, AssignmentGetterService>();
+            services.AddScoped<IAssignmentUpdaterService, AssignmentUpdaterService>();
+            services.AddScoped<IAssignmentDeleterService, AssignmentDeleterService>();
 
             services.AddDbContext<AppDbContext>(options =>
             {

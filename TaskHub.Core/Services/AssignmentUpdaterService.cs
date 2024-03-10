@@ -23,6 +23,8 @@ namespace TaskHub.Core.Services
 
             if (assignmentFromID == null) throw new NotFoundInDatabaseException("Cannot find task with given ID");
 
+            if (assignmentUpdateRequest!.Content == assignmentFromID.Content) return assignmentFromID.ToAssignmentResponse();
+
             assignmentFromID.Content = assignmentUpdateRequest!.Content;
 
             if (await _db.SaveChangesAsync() > 0) return assignmentFromID.ToAssignmentResponse();

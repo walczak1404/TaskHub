@@ -1,27 +1,45 @@
-const editBtns = document.querySelectorAll(".fa-solid.fa-pen");
-const contents = document.querySelectorAll(".tasks-main__list__single-task__content");
+const taskList = document.getElementById("task-list");
 const backdrop = document.getElementById("backdrop");
-const backdropInputHidden = document.getElementById("AssignmentID");
-const backdropInputContent = document.getElementById("Content");
+const cancelBtn = backdrop.querySelector("#edit-task-cancel-btn");
+const assignmentID = backdrop.querySelector("#AssignmentID");
+const content = backdrop.querySelector("#Content");
 
-//editBtns.forEach(function (btn) {
-//    btn.addEventListener("click", function () {
-//        btn.classList.add("fa-pen--hidden");
-//    })
-//})
+taskList.addEventListener("click", async function (event) {
+    if (event.target.classList.contains("fa-pen")) {
+        //event.preventDefault();
+        //const href = event.target.closest('a').href;
 
-for(let i = 0; i < editBtns.length; i++) {
-    editBtns[i].addEventListener("click", function () {
-        backdropInputHidden.value = editBtns[i].dataset.taskid;
-        backdropInputContent.value = contents[i].textContent.trim();
+        //let response = await fetch(href);
+
+        //responseHTML = await response.text();
+        //document.body.insertAdjacentHTML("beforeend", responseHTML);
+
+        //const backdrop = document.getElementById("backdrop");
+        //const cancelBtn = backdrop.querySelector("#edit-task-cancel-btn");
+
+        assignmentID.value = event.target.dataset.taskid;
+        content.value = event.target.dataset.taskcontent;
+
         backdrop.classList.add("backdrop--active");
-        backdropInputContent.focus();
-        backdropInputContent.setSelectionRange(backdropInputContent.value.length, backdropInputContent.value.length);
-    });
-}
+
+        //backdrop.addEventListener("click", function (event) {
+        //    if (event.target == event.currentTarget) {
+        //        document.body.removeChild(backdrop);
+        //    }
+        //});
+
+        //cancelBtn.addEventListener("click", function () {
+        //    document.body.removeChild(backdrop);
+        //})
+    }
+});
 
 backdrop.addEventListener("click", function (event) {
     if (event.target == event.currentTarget) {
         backdrop.classList.remove("backdrop--active");
     }
 });
+
+cancelBtn.addEventListener("click", function () {
+    backdrop.classList.remove("backdrop--active");
+})

@@ -43,13 +43,12 @@
 
     &__list-container {
         font-size: .83em;
-        width: 100%;
+        width: 90%;
+        margin: auto;
+        max-width: 750px;
         @include flex(flex-start, center);
-
-        > * {
-            width: 90%;
-            max-width: 750px;
-        }
+        //> * {
+        //}
 
         @media(min-width: 900px) {
             font-size: .9em;
@@ -58,40 +57,46 @@
 
     &__list {
         list-style-type: none;
+        margin: auto;
 
         &__single-task {
-            @include flex(flex-start, stretch, row);
+            @include flex(flex-start, center, row);
             margin-bottom: 7%;
 
             &__icon {
-                @include flex(center, center);
                 margin-right: 2%;
-
-                .fa-circle-check {
-                    display: none;
-                }
+                justify-content: center;
+                align-items: center;
             }
 
             &__content {
-                position: relative;
+                width: fit-content;
+                flex-grow: 0;
             }
 
             &__edit {
                 flex-grow: 1;
-                @include flex(center);
-                color: #e1e401;
-                transform: scale(0);
-                padding-left: 2%;
-                cursor: pointer;
+                @include flex(flex-start, center, row);
+                color: $pageSecondaryColor;
+                transform: scaleY(0);
+                padding-left: 5%;
 
-                .fa-pen.fa-pen--hidden {
-                    display: none;
+                > * {
+                    cursor: pointer;
+                }
+
+                .fa-pen {
+                    color: #dcdd0c;
+                }
+
+                .fa-trash {
+                    margin-left: 15px;
                 }
             }
 
             &:hover {
                 .tasks-main__list__single-task__edit {
-                    transform: scale(1);
+                    transform: scaleY(1);
                 }
             }
 
@@ -107,6 +112,10 @@
                 }
             }
         }
+    }
+
+    &__add-task {
+        display: flex;
     }
 
     &__arrow {

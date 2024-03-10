@@ -1,15 +1,94 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TaskHub.Core.Domain.Entities;
+using TaskHub.Core.DTO;
+using TaskHub.Core.ServiceContracts;
 
 namespace TaskHub.Web.Controllers
 {
     public class AssignmentsController : Controller
     {
-        [Route("/{selectedDate:datetime?}")]
-        public IActionResult List(DateTime? selectedDate)
-        {
-            ViewBag.SelectedDate = selectedDate != null ? selectedDate.Value.ToString("dd.MM.yyyy") : DateTime.Today.Date.ToString("dd.MM.yyyy");
+        private readonly IAssignmentGetterService _assignmentGetterService;
+        private readonly IAssignmentUpdaterService _assignmentUpdaterService;
+        private readonly IAssignmentDeleterService _assignmentDeleterService;
 
-            return View();
+        public AssignmentsController(IAssignmentGetterService assignmentGetterService, IAssignmentUpdaterService assignmentUpdaterService, IAssignmentDeleterService assignmentDeleterService)
+        {
+            _assignmentGetterService = assignmentGetterService;
+            _assignmentUpdaterService = assignmentUpdaterService;
+            _assignmentDeleterService = assignmentDeleterService;
+        }
+
+        [Route("/{selectedDate:datetime?}")]
+        public async Task<IActionResult> List(DateTime? selectedDate)
+        {
+            DateTime date = selectedDate != null ? selectedDate.Value : DateTime.Today.Date;
+
+            ViewBag.SelectedDate = date.ToString("dd.MM.yyyy");
+            ViewBag.SelectedDateLink = date.ToString("yyyy-MM-dd");
+
+            Guid userID = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            List<AssignmentResponse> assignments = await _assignmentGetterService.GetAssignmentsForDay(date, userID);
+
+            AssignmentUpdateRequest? updateModel = null;
+
+            if ((Guid?)TempData["UpdateID"] != null)
+            {
+                AssignmentResponse updateModelResponse = await _assignmentGetterService.GetAssignmentByID((Guid?)TempData["UpdateID"]);
+                updateModel = updateModelResponse.ToUpdateRequest();
+                //ViewBag.Errors = TempData["Errors"] as string;
+            }
+
+            ListViewModel viewModel = new ListViewModel()
+            {
+                Assignments = assignments,
+                UpdateRequest = updateModel == null ? null : updateModel
+            };
+
+            return View(viewModel);
+        }
+
+
+        [Route("/edit/{assignmentID:guid?}")]
+        public async Task<IActionResult> RenderEditPartial(Guid assignmentID, DateTime selectedDate)
+        {
+            AssignmentResponse assignment = await _assignmentGetterService.GetAssignmentByID(assignmentID);
+
+            ViewBag.SelectedDateLink = selectedDate.ToString("yyyy-MM-dd");
+
+            return PartialView("_EditModalPartial", assignment.ToUpdateRequest());
+        }
+
+        [HttpPost]
+        [Route("/update")]
+        public async Task<IActionResult> EditAssignment(AssignmentUpdateRequest assignmentUpdateRequest, DateTime? selectedDate)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["UpdateID"] = assignmentUpdateRequest.AssignmentID;
+                return RedirectToAction("List", new {selectedDate = selectedDate?.ToString("yyyy-MM-dd")});
+            }
+
+            await _assignmentUpdaterService.ChangeContent(assignmentUpdateRequest);
+
+            return RedirectToAction("List", new { selectedDate = selectedDate?.ToString("yyyy-MM-dd") });
+        }
+
+        [Route("/delete/{assignmentID:guid}")]
+        public async Task<IActionResult> DeleteAssignment(Guid assignmentID, DateTime? selectedDate)
+        {
+            await _assignmentDeleterService.RemoveAssignment(assignmentID);
+
+            return RedirectToAction("List", new { selectedDate =  selectedDate?.ToString("yyyy-MM-dd")});
+        }
+
+        [Route("/update-status/{assignmentID:guid}")]
+        public async Task<IActionResult> ChangeAssignmentStatus(Guid assignmentID, DateTime? selectedDate)
+        {
+            await _assignmentUpdaterService.ChangeStatus(assignmentID);
+
+            return RedirectToAction("List", new { selectedDate = selectedDate?.ToString("yyyy-MM-dd") });
         }
     }
 }

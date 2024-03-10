@@ -13,6 +13,15 @@ namespace TaskHub.Core.DTO
         public bool IsDone { get; set; }
 
         public Guid? AuthorID { get; set; }
+
+        public AssignmentUpdateRequest ToUpdateRequest()
+        {
+            return new AssignmentUpdateRequest()
+            {
+                AssignmentID = AssignmentID,
+                Content = Content
+            };
+        }
     }
 
     public static class AssignmentExtensions
