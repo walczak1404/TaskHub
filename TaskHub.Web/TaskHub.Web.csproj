@@ -31,8 +31,4 @@
     <ProjectReference Include="..\TaskHub.Infrastructure\TaskHub.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot" />
-  </ItemGroup>
-
 </Project>

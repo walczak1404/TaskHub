@@ -1,0 +1,11 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/Styles/Subpages/error.min.css">
+}
+
+<div class="container container--narrow">
+    <h1>Unexpected error ocurred</h1>
+    @if(ViewBag.ErrorMessage != null)
+    {
+        <p>@ViewBag.ErrorMessage</p>
+    }
+</div>

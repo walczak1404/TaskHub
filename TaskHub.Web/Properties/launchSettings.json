@@ -8,6 +8,14 @@
       },
       "applicationUrl": "https://localhost:57346;http://localhost:57347"
     },
+    "TaskHub.WebPROD": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "applicationUrl": "https://localhost:57346;http://localhost:57347"
+    },
     "WSL": {
       "commandName": "WSL2",
       "launchBrowser": true,

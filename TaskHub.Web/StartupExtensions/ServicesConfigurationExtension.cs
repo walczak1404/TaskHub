@@ -45,11 +45,11 @@ namespace TaskHub.Web.StartupExtensions
                 .AddUserStore<UserStore<AppUser, AppRole, AppDbContext, Guid>>()
                 .AddRoleStore<RoleStore<AppRole, AppDbContext, Guid>>();
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = false;
-                options.Cookie.SameSite = SameSiteMode.None;
-            });
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.Cookie.HttpOnly = false;
+            //    options.Cookie.SameSite = SameSiteMode.None;
+            //});
 
             services.AddCors();
 
@@ -71,6 +71,7 @@ namespace TaskHub.Web.StartupExtensions
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/SignIn";
+                options.AccessDeniedPath = "/Error";
             });
 
             return services;

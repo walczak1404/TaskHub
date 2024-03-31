@@ -6,7 +6,14 @@ builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseDeveloperExceptionPage();
+if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Error");
+}
 
 
 app.UseHsts();
@@ -14,13 +21,6 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseRouting();
-
-app.UseCors(builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-});
 
 //app.UseCookieAuthentication();
 app.UseAuthentication();

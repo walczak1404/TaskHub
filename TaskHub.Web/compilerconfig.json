@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/Styles/Subpages/list.css",
     "inputFile": "wwwroot/Styles/Subpages/list.scss"
+  },
+  {
+    "outputFile": "wwwroot/Styles/Subpages/error.css",
+    "inputFile": "wwwroot/Styles/Subpages/error.scss"
   }
 ]
