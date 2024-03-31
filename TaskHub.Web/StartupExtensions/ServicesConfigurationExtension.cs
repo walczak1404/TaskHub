@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,8 @@ namespace TaskHub.Web.StartupExtensions
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<AppUser, AppRole, AppDbContext, Guid>>()
                 .AddRoleStore<RoleStore<AppRole, AppDbContext, Guid>>();
+
+            services.AddDataProtection().PersistKeysToDbContext<AppDbContext>();
 
             services.AddAuthorization(options =>
             {
