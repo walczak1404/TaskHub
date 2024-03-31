@@ -1,18 +1,17 @@
 ﻿using TaskHub.Core.Domain.Entities;
+using TaskHub.Core.Domain.RepositoryContracts;
 using TaskHub.Core.DTO;
-using TaskHub.Core.Exceptions;
 using TaskHub.Core.ServiceContracts;
-using TaskHub.Infrastructure.Context;
 
 namespace TaskHub.Core.Services
 {
     public class AssignmentAdderService : IAssignmentAdderService
     {
-        private readonly AppDbContext _db;
+        private readonly IAssignmentRepository _assignments;
 
-        public AssignmentAdderService(AppDbContext db)
+        public AssignmentAdderService(IAssignmentRepository assignmentRepository)
         {
-            _db = db;
+            _assignments = assignmentRepository;
         }
 
         public async Task<AssignmentResponse> AddAssignment(AssignmentAddRequest? assignmentAddRequest)
@@ -21,10 +20,9 @@ namespace TaskHub.Core.Services
 
             Assignment assignment = assignmentAddRequest!.ToAssignment();
 
-            _db.Assignments.Add(assignment);
+            Assignment addedAssignment = await _assignments.AddAssignment(assignment);
 
-            if (await _db.SaveChangesAsync() > 0) return assignment.ToAssignmentResponse();
-            else throw new FailedDatabaseOperationException("Cannot add task to database");
+            return addedAssignment.ToAssignmentResponse();
         }
     }
 }

@@ -40,7 +40,6 @@ namespace TaskHub.Web.Controllers
             {
                 AssignmentResponse updateModelResponse = await _assignmentGetterService.GetAssignmentByID((Guid?)TempData["UpdateID"]);
                 updateModel = updateModelResponse.ToUpdateRequest();
-                //ViewBag.Errors = TempData["Errors"] as string;
             }
 
             ListViewModel viewModel = new ListViewModel()

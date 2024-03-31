@@ -15,7 +15,7 @@ namespace TaskHub.Core.ServiceContracts
         /// Removes assignment from database
         /// </summary>
         /// <param name="assignmentID">ID of deleted assignment</param>
-        /// <returns>True if assignment was deleted</returns>
-        Task<bool> RemoveAssignment(Guid? assignmentID);
+        /// <returns></returns>
+        Task RemoveAssignment(Guid? assignmentID);
     }
 }

@@ -1,50 +1,45 @@
 ﻿using TaskHub.Core.Domain.Entities;
+using TaskHub.Core.Domain.RepositoryContracts;
 using TaskHub.Core.DTO;
-using TaskHub.Core.Exceptions;
 using TaskHub.Core.ServiceContracts;
-using TaskHub.Infrastructure.Context;
 
 namespace TaskHub.Core.Services
 {
     public class AssignmentUpdaterService : IAssignmentUpdaterService
     {
-        private readonly AppDbContext _db;
+        private readonly IAssignmentRepository _assignments;
 
-        public AssignmentUpdaterService(AppDbContext db)
+        public AssignmentUpdaterService(IAssignmentRepository assignments)
         {
-            _db = db;
+            _assignments = assignments;
         }
 
         public async Task<AssignmentResponse> ChangeContent(AssignmentUpdateRequest? assignmentUpdateRequest)
         {
             Validation.Validate(assignmentUpdateRequest);
 
-            Assignment? assignmentFromID = _db.Assignments.FirstOrDefault(a => a.AssignmentID == assignmentUpdateRequest!.AssignmentID);
+            Assignment? assignmentFromID = await _assignments.GetAssignmentByID(assignmentUpdateRequest.AssignmentID!.Value);
 
-            if (assignmentFromID == null) throw new NotFoundInDatabaseException("Cannot find task with given ID");
+            if (assignmentFromID == null) throw new ArgumentException("Cannot find task with given ID");
 
             if (assignmentUpdateRequest!.Content == assignmentFromID.Content) return assignmentFromID.ToAssignmentResponse();
 
-            assignmentFromID.Content = assignmentUpdateRequest!.Content;
+            Assignment modifiedAssignment = await _assignments.ChangeContent(assignmentFromID, assignmentUpdateRequest!.Content!);
 
-            if (await _db.SaveChangesAsync() > 0) return assignmentFromID.ToAssignmentResponse();
-
-            throw new FailedDatabaseOperationException("Cannot modify task content");
+            return modifiedAssignment.ToAssignmentResponse();
         }
 
         public async Task<AssignmentResponse> ChangeStatus(Guid? assignmentID)
         {
             if (assignmentID == null) throw new ArgumentNullException(nameof(assignmentID));
 
-            Assignment? assignmentFromID = _db.Assignments.FirstOrDefault(a => a.AssignmentID == assignmentID);
+            Assignment? assignmentFromID = await _assignments.GetAssignmentByID(assignmentID.Value);
 
-            if (assignmentFromID == null) throw new NotFoundInDatabaseException("Cannot find task with given ID");
+            if (assignmentFromID == null) throw new ArgumentException("Cannot find task with given ID");
 
-            assignmentFromID.IsDone = !assignmentFromID.IsDone;
+            Assignment modifiedAssignment = await _assignments.ChangeStatus(assignmentFromID);
 
-            if (await _db.SaveChangesAsync() > 0) return assignmentFromID.ToAssignmentResponse();
-
-            throw new FailedDatabaseOperationException("Cannot modify task status");
+            return modifiedAssignment.ToAssignmentResponse();
         }
     }
 }

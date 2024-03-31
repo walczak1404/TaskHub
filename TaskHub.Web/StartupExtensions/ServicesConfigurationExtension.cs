@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TaskHub.Core.Domain.Entities.Identity;
+using TaskHub.Core.Domain.RepositoryContracts;
 using TaskHub.Core.ServiceContracts;
 using TaskHub.Core.Services;
 using TaskHub.Infrastructure.Context;
+using TaskHub.Infrastructure.Repositories;
 
 namespace TaskHub.Web.StartupExtensions
 {
@@ -15,6 +17,8 @@ namespace TaskHub.Web.StartupExtensions
         {
             services.AddControllersWithViews();
 
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
+
             services.AddScoped<IAssignmentAdderService, AssignmentAdderService>();
             services.AddScoped<IAssignmentGetterService, AssignmentGetterService>();
             services.AddScoped<IAssignmentUpdaterService, AssignmentUpdaterService>();
@@ -22,7 +26,7 @@ namespace TaskHub.Web.StartupExtensions
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("Webio"));
             });
 
             services.AddIdentity<AppUser, AppRole>(options =>

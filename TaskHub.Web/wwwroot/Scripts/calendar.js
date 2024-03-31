@@ -13,11 +13,6 @@ let selectedDate = new Date(selectedDateArr[2], selectedDateArr[1] - 1, selected
 
 let date = new Date();
 
-console.log(currYear)
-console.log(currMonth)
-console.log(selectedDate.getDate())
-
-
 
 // storing full name of all months in array
 const months = ["January", "February", "March", "April", "May", "June", "July",
@@ -38,12 +33,13 @@ const renderCalendar = () => {
     }
     for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
-        let isToday = i === date.getDate() && date.getMonth() === new Date().getMonth() 
+        let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
             && currYear === new Date().getFullYear() ? "today" : "";
 
         let isSelectedDay = i === selectedDate.getDate() && selectedMonth === currMonth && selectedYear === currYear ? "selected-day" : "";
         liTag += `<li class="${isToday} ${isSelectedDay}"><a href='/${currYear}-${currMonth+1}-${i}'>${i}</a></li>`;
     }
+
     for (let i = lastDayofMonth; i < 7 && i > 0; i++) { // creating li of next month first days
         tempDate = new Date(currYear, currMonth, 1);
         tempDate.setMonth(tempDate.getMonth() + 1);

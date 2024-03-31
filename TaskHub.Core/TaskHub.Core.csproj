@@ -4,7 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<!--<NoWarn>$(NoWarn);NU1701</NoWarn>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +12,5 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="TaskHub.Infrastructure">
-      <HintPath>..\TaskHub.Infrastructure\bin\Debug\net6.0\TaskHub.Infrastructure.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
