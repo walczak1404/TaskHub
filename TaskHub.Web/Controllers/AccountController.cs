@@ -27,6 +27,7 @@ namespace TaskHub.Web.Controllers
 
         [Authorize("NotSignedIn")]
         [HttpPost]
+        
         public async Task<IActionResult> SignIn(AppUserSignIn signInModel, string? returnUrl)
         {
             if(!ModelState.IsValid)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskHub.Core.Domain.Entities.Identity;
 using TaskHub.Core.Domain.RepositoryContracts;
@@ -16,7 +17,10 @@ namespace TaskHub.Web.StartupExtensions
     {
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
 
             services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
@@ -43,6 +47,7 @@ namespace TaskHub.Web.StartupExtensions
 
             services.ConfigureApplicationCookie(options =>
             {
+                options.Cookie.HttpOnly = false;
                 options.Cookie.SameSite = SameSiteMode.None;
             });
 
