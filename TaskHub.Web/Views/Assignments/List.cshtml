@@ -1,10 +1,11 @@
-﻿@model ListViewModel
+﻿@using System.Globalization
+@model ListViewModel
 @{
     ViewBag.Title = "Assignments";
 
     // ViewBag.ListHeaderUsername = User.Identity!.Name!.EndsWith('s') ? $"{User.Identity.Name}'" : $"{User.Identity.Name}'s";
 
-    DateTime selectedDate = DateTime.Parse(ViewBag.SelectedDate);
+    DateTime selectedDate = DateTime.Parse(ViewBag.SelectedDate, new CultureInfo("pl-PL"));
     string dayBefore = selectedDate.AddDays(-1).ToString("yyyy-MM-dd");
     string dayAfter = selectedDate.AddDays(1).ToString("yyyy-MM-dd");
 
