@@ -103,5 +103,19 @@ namespace TaskHub.Web.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("SignIn", new { returnUrl = "" });
         }
+
+        [Authorize("NotSignedIn")]
+        public async Task<IActionResult> IsEmailAvailable(string email)
+        {
+            AppUser? user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return Json(true); //valid
+            }
+            else
+            {
+                return Json(false); //invalid
+            }
+        }
     }
 }

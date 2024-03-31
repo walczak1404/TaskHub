@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TaskHub.Core.Domain.Entities.Identity;
 
 namespace TaskHub.Core.DTO
@@ -11,7 +12,7 @@ namespace TaskHub.Core.DTO
 
         [Required(ErrorMessage = "{0} cannot be blank")]
         [EmailAddress(ErrorMessage = "{0} must be in valid email format")]
-        //[Remote("test", "test")]
+        [Remote(action: "IsEmailAvailable", controller: "Account", ErrorMessage = "Email is already used")]
         public string? Email { get; set; }
 
         [Required(ErrorMessage = "{0} cannot be blank")]
