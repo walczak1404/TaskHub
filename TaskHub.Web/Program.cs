@@ -25,6 +25,7 @@ app.UseCors(builder =>
            .AllowAnyHeader();
 });
 
+//app.UseCookieAuthentication();
 app.UseAuthentication();
 app.UseAuthorization();
 

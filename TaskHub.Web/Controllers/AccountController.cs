@@ -40,10 +40,11 @@ namespace TaskHub.Web.Controllers
 
             if(result.Succeeded)
             {
-                if(string.IsNullOrEmpty(returnUrl))
+                if (string.IsNullOrEmpty(returnUrl))
                 {
                     return RedirectToAction("List", "Assignments");
-                } else
+                }
+                else
                 {
                     return LocalRedirect(returnUrl);
                 }

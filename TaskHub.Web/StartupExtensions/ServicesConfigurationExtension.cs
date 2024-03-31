@@ -41,7 +41,10 @@ namespace TaskHub.Web.StartupExtensions
                 .AddUserStore<UserStore<AppUser, AppRole, AppDbContext, Guid>>()
                 .AddRoleStore<RoleStore<AppRole, AppDbContext, Guid>>();
 
-            //services.AddIdentityServer()
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = SameSiteMode.None;
+            });
 
             services.AddCors();
 
