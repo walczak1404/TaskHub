@@ -41,7 +41,9 @@ namespace TaskHub.Web.StartupExtensions
                 .AddUserStore<UserStore<AppUser, AppRole, AppDbContext, Guid>>()
                 .AddRoleStore<RoleStore<AppRole, AppDbContext, Guid>>();
 
-            services.AddDataProtection().PersistKeysToDbContext<AppDbContext>();
+            //services.AddIdentityServer()
+
+            services.AddCors();
 
             services.AddAuthorization(options =>
             {
