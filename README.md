@@ -16,7 +16,7 @@ TaskHub offers a comprehensive set of features tailored to enhance your task man
 
 To get started with TaskHub, follow these simple steps:
 
-1. **Accessing the website**: Go to [Visible Text](taskhub.azurewebsites.net).
+1. **Accessing the app**: Go to [TaskHub website](taskhub.azurewebsites.net).
 2. **Create an Account**: Open the app and sign up for an account or log in if you already have one.
 3. **Add Your First Task**: Choose correct day in calendar and tap the "+" button to add a new task.
 4. **Manage Your Tasks**: Use the edit and delete options next to task to modify or remove it as your plans change.
